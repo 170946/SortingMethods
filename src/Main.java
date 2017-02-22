@@ -1,3 +1,19 @@
+/**
+ * insertionSortRecursive:   AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 6344516ns
+ * 						 		  				   NUMBER OF SORTS: 109
+ * insertionSortIterative:   AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 6183592ns
+ * 						 					   	   NUMBER OF SORTS: 109
+ * selectionSortRecursive:	 AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 1586571ns
+ * 						 						   NUMBER OF SORTS: 15
+ * selectionSortIterative:	 AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 1181417ns
+ * 						 						   NUMBER OF SORTS: 15
+ * 
+ * It seems that a selection sort is much faster, but that may just be due to the inefficiency of
+ * 	swapping, as well as repeated calls to the Arrays.toString and System.out.println methods (insertion sort
+ * 	requires far more swapping operations)
+ */
+
+
 import java.util.Arrays;
 public class Main {
 	//A random permutation of the numbers from 1 to 20
@@ -7,7 +23,10 @@ public class Main {
 	public static void main(String[] args){
 		long startTime = System.nanoTime();
 		
-		insertionSortRecursive(intArray, 1);
+		//insertionSortRecursive(intArray, 1); 
+		//insertionSortIterative(intArray);
+		//selectionSortRecursive(intArray, 0);
+		//selectionSortIterative(intArray);
 		
 		long endTime = System.nanoTime();
 		System.out.println("RUNTIME: " + (endTime - startTime) + "ns");
@@ -25,6 +44,7 @@ public class Main {
 	 * 		   count becomes the number of times the array was sorted
 	 * 
 	 * AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 6344516ns
+	 * 						 NUMBER OF SORTS: 109
 	 */
 	public static void insertionSortRecursive(int[] a, int endIndex){
 		//This is necessary to deal with the base case, because we are steadily increasing endIndex
@@ -55,6 +75,9 @@ public class Main {
 	 * @result sorts the array a in ascending order
 	 * 		   prints the array after every change
 	 * 		   count becomes the number of times the array was sorted
+	 * 
+	 * AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 6183592ns
+	 * 						 NUMBER OF SORTS: 109
 	 */
 	public static void insertionSortIterative(int[] a){
 		for(int i = 1; i < a.length; i++){
@@ -84,6 +107,10 @@ public class Main {
 	 * 			sorted
 	 * 		   prints the array after every change
 	 * 		   count becomes the number of times the array was sorted
+	 * 
+	 * AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 1586571ns
+	 * 						 NUMBER OF SORTS: 15
+	 * 
 	 */
 	public static void selectionSortRecursive(int[] a, int endIndex){
 		if(endIndex >= a.length) return;
@@ -114,6 +141,9 @@ public class Main {
 	 * @result sorts the array a in ascending order
 	 * 		   prints the array after every change
 	 * 		   count becomes the number of times the array was sorted
+	 * 
+	 * AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 1181417ns
+	 * 						 NUMBER OF SORTS: 15
 	 */
 	public static void selectionSortIterative(int[] a){
 		//i represents the index you are swapping with the smallest in the rest of the array
