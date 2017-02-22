@@ -2,7 +2,7 @@ import java.util.Arrays;
 public class Main {
 	//A random permutation of the numbers from 1 to 20
 	static int[] intArray = {15, 8, 19, 7, 1, 13, 12, 20, 3, 14, 18, 5, 11, 6, 16, 4, 17, 10, 9, 2};
-	
+	static int count = 0;
 	
 	public static void main(String[] args){
 		long startTime = System.nanoTime();
@@ -11,6 +11,7 @@ public class Main {
 		
 		long endTime = System.nanoTime();
 		System.out.println("RUNTIME: " + (endTime - startTime) + "ns");
+		System.out.println("Number of sorts: " + count);
 	}
 	
 	
@@ -21,6 +22,7 @@ public class Main {
 	 * @result sorts a in ascending order, assuming that indices 0 to endIndex - 1 (inclusive) are already
 	 * 			sorted
 	 * 		   prints the contents of the array every time it is changed
+	 * 		   count becomes the number of times the array was sorted
 	 * 
 	 * AVERAGE RUNTIME (GUESS AFTER 5 TRIES): 6344516ns
 	 */
@@ -37,7 +39,9 @@ public class Main {
 				int temp = a[i];
 				a[i] = a[i-1];
 				a[i-1] = temp;
+				
 				System.out.println(Arrays.toString(a));
+				count++;
 			}
 		}
 		
@@ -50,6 +54,7 @@ public class Main {
 	 * @param a, the int array to be sorted in ascending order
 	 * @result sorts the array a in ascending order
 	 * 		   prints the array after every change
+	 * 		   count becomes the number of times the array was sorted
 	 */
 	public static void insertionSortIterative(int[] a){
 		for(int i = 1; i < a.length; i++){
@@ -63,7 +68,9 @@ public class Main {
 					int temp = a[j];
 					a[j] = a[j-1];
 					a[j-1] = temp;
+					
 					System.out.println(Arrays.toString(a));
+					count++;
 				}
 			}
 		}
@@ -76,6 +83,7 @@ public class Main {
 	 * @result sorts the array a in ascending order, assuming that indices 0 to endIndex - 1 are already
 	 * 			sorted
 	 * 		   prints the array after every change
+	 * 		   count becomes the number of times the array was sorted
 	 */
 	public static void selectionSortRecursive(int[] a, int endIndex){
 		if(endIndex >= a.length) return;
@@ -88,12 +96,14 @@ public class Main {
 			}
 		}//Now, indexToSwap is correct
 		
-		//Swaps the elements at indexToSwap and endIndex
-		int temp = a[indexToSwap];
-		a[indexToSwap] = a[endIndex];
-		a[endIndex] = temp;
-		
-		System.out.println(Arrays.toString(a));
+		if(indexToSwap != endIndex){//Swaps the elements at indexToSwap and endIndex
+			int temp = a[indexToSwap];
+			a[indexToSwap] = a[endIndex];
+			a[endIndex] = temp;
+			
+			System.out.println(Arrays.toString(a));
+			count++;
+		}
 		
 		selectionSortRecursive(a, endIndex + 1);
 	}
@@ -103,6 +113,7 @@ public class Main {
 	 * @param a, the int array to be sorted in ascending order
 	 * @result sorts the array a in ascending order
 	 * 		   prints the array after every change
+	 * 		   count becomes the number of times the array was sorted
 	 */
 	public static void selectionSortIterative(int[] a){
 		//i represents the index you are swapping with the smallest in the rest of the array
@@ -115,12 +126,16 @@ public class Main {
 				}
 			}//Now, indexToSwap is correct
 			
+			if(indexToSwap == i) continue;
+			
+			
 			//Swaps the elements at i and indexToSwap
 			int temp = a[indexToSwap];
 			a[indexToSwap] = a[i];
 			a[i] = temp;
 			
 			System.out.println(Arrays.toString(a));
+			count++;
 		}
 	}
 	
